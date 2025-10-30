@@ -13,37 +13,22 @@ MonoBehaviour:
   m_Name: Chair_Manual
   m_EditorClassIdentifier: Assembly-CSharp::ListInstructions
   clauses:
-  - text: Mount the seat onto Leg A.
+  - text: Attach a leg to base.
     isTruth: 1
     actionTag: 
     prereqTags: []
     decoyTags: []
-  - text: Install glass shelf.
+  - text: Attach a leg to base.
+    isTruth: 1
+    actionTag: 
+    prereqTags: []
+    decoyTags: []
+  - text: Install glass to back.
     isTruth: 0
     actionTag: 
     prereqTags: []
     decoyTags: []
-  - text: Attach Leg B to seat.
-    isTruth: 1
-    actionTag: 
-    prereqTags: []
-    decoyTags: []
-  - text: Attach Leg C to seat.
-    isTruth: 1
-    actionTag: 
-    prereqTags: []
-    decoyTags: []
-  - text: Attach Leg D to seat.
-    isTruth: 1
-    actionTag: 
-    prereqTags: []
-    decoyTags: []
-  - text: Attach Leg E to seat.
-    isTruth: 0
-    actionTag: 
-    prereqTags: []
-    decoyTags: []
-  - text: Finish CMPM170 prototype.
+  - text: 
     isTruth: 0
     actionTag: 
     prereqTags: []

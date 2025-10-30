@@ -10,10 +10,10 @@ public class ManualPageController : MonoBehaviour
 
     [Header("UI")]
     public RectTransform clauseListRoot;   // Parent with VerticalLayoutGroup
-    public Button clauseButtonPrefab;      // Prefab we made earlier
+    public Button clauseButtonPrefab;
 
     [Header("Options")]
-    public bool startAllIgnored = true;    // Start with paper 'zoned out'
+    public bool startAllIgnored = true;
 
     // runtime state
     private HashSet<int> kept = new();                 // indices of kept clauses
@@ -28,7 +28,7 @@ public class ManualPageController : MonoBehaviour
     // Build the button list from the data
     void BuildUI()
     {
-        // Clear any existing children (editor play/reload safety)
+        // Clear any existing children
         for (int i = clauseListRoot.childCount - 1; i >= 0; i--)
         {
             Destroy(clauseListRoot.GetChild(i).gameObject);
@@ -44,7 +44,7 @@ public class ManualPageController : MonoBehaviour
             var btn = Instantiate(clauseButtonPrefab, clauseListRoot);
             var label = btn.GetComponentInChildren<TextMeshProUGUI>(true);
 
-            // Save original text so we can swap back/forth
+            // Save original text to swap back/forth
             originalText[i] = clause.text;
 
             // Default state
@@ -96,7 +96,6 @@ public class ManualPageController : MonoBehaviour
         return s.Substring(0, targetLen);
     }
 
-    // Optional helpers you might use later:
     public bool IsKept(int idx) => kept.Contains(idx);
     public void KeepAll(bool keep)
     {
