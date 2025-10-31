@@ -56,7 +56,8 @@ public class SelectFurniture : MonoBehaviour
     private void ConnectFurniture(GameObject con2)
     {
         GameObject movingPiece = selected.transform.parent.gameObject;
-        movingPiece.transform.position = con2.transform.position;
+        Vector3 offset = new Vector3(movingPiece.transform.position.x - selected.transform.position.x, movingPiece.transform.position.y - selected.transform.position.y, movingPiece.transform.position.z - selected.transform.position.z);
+        movingPiece.transform.position = con2.transform.position + offset;
     }
 
     private void Select(GameObject ob)
