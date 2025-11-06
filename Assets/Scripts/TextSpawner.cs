@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class TextSpawner : MonoBehaviour
 {
     [Header("References")]
-    public RectTransform playArea;              // assign the PlayArea panel
+    public RectTransform PlayArea;              // assign the PlayArea panel
     public TextMeshProUGUI textPrefab;          
 
     [Header("Messages")]
     [TextArea] public List<string> messages = new List<string>()
     {
-        "hey!", "look over here", "pls focus", "ping!", "67",
+        "hey!", "look over here", "pls focus", "ping!", "because 67",
         ":P", "stop ignoring me", "you need to install wheels too", "did you turn in your prototype?", "lol",
         "hello?", "are you still there?", "the fitness gram pacer test", "is a multistage aerobic capacity test",
         "why was 6 afraid of 7?", "did I lock the door?"
@@ -37,7 +37,7 @@ public class TextSpawner : MonoBehaviour
         var wait = new WaitForSecondsRealtime(spawnInterval);
         while (enabled)
         {
-            if (textPrefab && playArea && messages.Count > 0)
+            if (textPrefab && PlayArea && messages.Count > 0)
                 SpawnOne();
             yield return wait;
         }
@@ -53,7 +53,7 @@ public class TextSpawner : MonoBehaviour
             if (oldest) Destroy(oldest);
         }
 
-        var tmp = Instantiate(textPrefab, playArea);
+        var tmp = Instantiate(textPrefab, PlayArea);
         tmp.text = messages[cursor];
         cursor = (cursor + 1) % messages.Count;
 
@@ -65,7 +65,7 @@ public class TextSpawner : MonoBehaviour
         var rt = tmp.rectTransform;
         rt.sizeDelta = new Vector2(tmp.preferredWidth, tmp.preferredHeight);
 
-        var area = playArea.rect;
+        var area = PlayArea.rect;
         var half = rt.sizeDelta * 0.5f;
         var min = area.min + half;
         var max = area.max - half;
@@ -79,7 +79,7 @@ public class TextSpawner : MonoBehaviour
         var speed = Random.Range(minSpeed, maxSpeed);
 
         var b = tmp.gameObject.AddComponent<Bouncer>();
-        b.Init(playArea, dir * speed);
+        b.Init(PlayArea, dir * speed);
         b.lifetime = lifetime;
 
         actives.Add(tmp.gameObject);
