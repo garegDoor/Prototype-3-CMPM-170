@@ -6,10 +6,11 @@ public class TextSpawner : MonoBehaviour
 {
     [Header("References")]
     public RectTransform PlayArea;              // assign the PlayArea panel
-    public TextMeshProUGUI textPrefab;          
+    public TextMeshProUGUI textPrefab;
 
     [Header("Messages")]
-    [TextArea] public List<string> messages = new List<string>()
+    [TextArea]
+    public List<string> messages = new List<string>()
     {
         "hey!", "look over here", "pls focus", "ping!", "because 67",
         ":P", "stop ignoring me", "you need to install wheels too", "did you turn in your prototype?", "lol",
@@ -19,17 +20,23 @@ public class TextSpawner : MonoBehaviour
 
     [Header("Spawn")]
     public float spawnInterval = 0.6f;
-    public int   maxActive = 50;
+    public int maxActive = 50;
     public float lifetime = 6f;
 
     [Header("Motion")]
     public float minSpeed = 100f;
     public float maxSpeed = 220f;
 
+    [Header("Appearance")]
+    public float minFontSize = 24f;
+    public float maxFontSize = 96f;   // <- make it bigger as you like
+    public bool vividColors = true;  // use HSV for punchy colors
+
+
     int cursor = 0;
     readonly List<GameObject> actives = new();
 
-    void OnEnable()  => StartCoroutine(SpawnLoop());
+    void OnEnable() => StartCoroutine(SpawnLoop());
     void OnDisable() => StopAllCoroutines();
 
     System.Collections.IEnumerator SpawnLoop()
@@ -54,13 +61,45 @@ public class TextSpawner : MonoBehaviour
         }
 
         var tmp = Instantiate(textPrefab, PlayArea);
+
+        tmp.enableVertexGradient = false;
+        tmp.colorGradientPreset = null;
+        tmp.overrideColorTags = true;
+
+        var c = Color.HSVToRGB(Random.value, 0.9f, 1f);
+        tmp.color = c;
+
+        var instMat = new Material(tmp.fontSharedMaterial);
+        instMat.SetColor(TMPro.ShaderUtilities.ID_FaceColor, c);
+
+        if (instMat.HasProperty(TMPro.ShaderUtilities.ID_OutlineColor))
+            instMat.SetColor(TMPro.ShaderUtilities.ID_OutlineColor, c);
+
+        tmp.fontMaterial = instMat;
+
+        tmp.enableAutoSizing = false;
+        tmp.fontSize = Random.Range(minFontSize, maxFontSize);
+
+
+        // Distinct color per spawn
+        if (vividColors)
+        {
+            tmp.color = Color.HSVToRGB(Random.value, 0.85f, 1f);
+        }
+        else
+        {
+            tmp.color = new Color(Random.value, Random.value, Random.value, 1f);
+        }
+
+        // Bigger randomized font size
+        tmp.enableAutoSizing = false;
+        tmp.fontSize = Random.Range(minFontSize, maxFontSize);
+
+        // Set message
         tmp.text = messages[cursor];
         cursor = (cursor + 1) % messages.Count;
 
-        tmp.color = new Color(Random.value, Random.value, Random.value);
-        tmp.fontSize = Random.Range(18f, 36f);
-
-        // Ensure correct size then place randomly inside bounds
+        // Update layout AFTER size/text changes
         tmp.ForceMeshUpdate();
         var rt = tmp.rectTransform;
         rt.sizeDelta = new Vector2(tmp.preferredWidth, tmp.preferredHeight);

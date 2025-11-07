@@ -218,8 +218,6 @@ MonoBehaviour:
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1 &298977933
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,8 +320,6 @@ MonoBehaviour:
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1 &381551111
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,14 +470,14 @@ MonoBehaviour:
   PlayArea: {fileID: 666933946}
   textPrefab: {fileID: 4221893932524000018, guid: e0594b4017b916e4d99766d6ba6aa467, type: 3}
   messages:
-  - hey!
+  - hey! listen!
   - look over here
   - pls focus
   - ping!
   - because 67
   - :P
   - stop ignoring me
-  - you need to install wheels too
+  - you should add wheels
   - did you turn in your prototype?
   - lol
   - hello?
@@ -490,11 +486,15 @@ MonoBehaviour:
   - is a multistage aerobic capacity test
   - why was 6 afraid of 7?
   - did I lock the door today?
+  - I miss my cat.
   spawnInterval: 0.6
   maxActive: 50
   lifetime: 6
   minSpeed: 100
   maxSpeed: 220
+  minFontSize: 24
+  maxFontSize: 96
+  vividColors: 0
 --- !u!1 &478117477
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,8 +639,6 @@ MonoBehaviour:
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1 &503422974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,8 +1171,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.233215, y: -34.539646}
-  m_SizeDelta: {x: 179.2701, y: 109.07929}
+  m_AnchoredPosition: {x: -0.000022888, y: -0.00026703}
+  m_SizeDelta: {x: 0, y: -0.00048828}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &666933947
 MonoBehaviour:
@@ -1189,7 +1187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.51319575, g: 0.5943396, b: 0.31679422, a: 0}
+  m_Color: {r: 0.51319575, g: 0.5943396, b: 0.31679422, a: 0.48235294}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1477,8 +1475,6 @@ MonoBehaviour:
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1 &1118768937 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4488217866273797650, guid: 29c2d60a1a871e74aa6649c7b7656706, type: 3}
@@ -1498,12 +1494,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickMask:
     serializedVersion: 2
-    m_Bits: 4294967287
+    m_Bits: 55
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1 &1183613590 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2374192910579233649, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
@@ -1527,8 +1521,6 @@ MonoBehaviour:
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1 &1235654813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,8 +1646,6 @@ MonoBehaviour:
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1 &1412873776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,8 +1920,6 @@ MonoBehaviour:
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1 &1845100613 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1080756262209089484, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
@@ -1955,8 +1943,6 @@ MonoBehaviour:
   dragPlaneNormal: {x: 0, y: 1, z: 0}
   startDragPixelThreshold: 6
   followLerp: 20
-  rb: {fileID: 0}
-  kinematicWhileDragging: 1
 --- !u!1001 &2021507824
 PrefabInstance:
   m_ObjectHideFlags: 0
