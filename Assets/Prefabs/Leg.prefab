@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1225154936870929023}
   m_Layer: 0
   m_Name: Connection
-  m_TagString: Untagged
+  m_TagString: Connection
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

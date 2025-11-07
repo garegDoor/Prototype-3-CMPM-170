@@ -1,32 +1,101 @@
 using UnityEngine;
 
-public class Draggable : MonoBehaviour
+public class DraggableSimple : MonoBehaviour
 {
-    Camera cam;
+    [Header("Pick Settings")]
+    [Tooltip("Layers that can start a drag. Exclude the 'Connection' layer.")]
+    public LayerMask pickMask;                 // Set in Inspector to Everything minus "Connection"
+
+    [Header("Drag Settings")]
+    [Tooltip("Drag on a plane whose normal is Up (horizontal plane).")]
+    public Vector3 dragPlaneNormal = Vector3.up;
+    [Tooltip("Higher = snappier follow.")]
+    public float followLerp = 20f;
+
+    [Header("Physics (optional)")]
+    public Rigidbody rb;                       // Assign if present
+    public bool kinematicWhileDragging = true; // Keeps physics from fighting while dragging
+
     bool dragging;
-    Vector3 offset;
+    Plane dragPlane;
+    Vector3 grabOffset;
 
-    void Awake() { cam = Camera.main; }
-
-    void OnMouseDown()
+    void Reset()
     {
-        dragging = true;
-        offset = transform.position - GetMouseOnPlane();
+        // Auto-exclude "Connection" if the layer exists
+        int conn = LayerMask.NameToLayer("Connection");
+        pickMask = (conn >= 0) ? ~(1 << conn) : ~0;
     }
 
-    void OnMouseUp() { dragging = false; }
+    void Awake()
+    {
+        if (!rb) rb = GetComponent<Rigidbody>();
+    }
+
+    void OnDisable()
+    {
+        dragging = false;
+        if (rb && kinematicWhileDragging) rb.isKinematic = true;
+    }
 
     void Update()
     {
-        if (!dragging) return;
-        transform.position = GetMouseOnPlane() + offset;
+        HandleStartStopDrag();
+        HandleDragMove();
     }
 
-    Vector3 GetMouseOnPlane()
+    // --------- DRAG START/STOP ----------
+    void HandleStartStopDrag()
     {
-        var plane = new Plane(Vector3.up, Vector3.zero);
-        var ray = cam.ScreenPointToRay(Input.mousePosition);
-        plane.Raycast(ray, out float d);
-        return ray.GetPoint(d);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit, 1000f, pickMask))
+            {
+                // Only begin drag if we hit this object (or one of its children),
+                // and NOT a "Connection" (filtered by pickMask).
+                if (hit.transform == transform || hit.transform.IsChildOf(transform))
+                    StartDrag(hit.point);
+            }
+        }
+
+        if (dragging && Input.GetMouseButtonUp(0))
+            StopDrag();
+    }
+
+    void StartDrag(Vector3 worldHit)
+    {
+        dragging = true;
+
+        // Create a plane through the current object position with the chosen normal
+        dragPlane = new Plane(dragPlaneNormal, transform.position);
+
+        // Maintain the offset from hit point to object pivot so dragging feels “grabbed”
+        grabOffset = transform.position - worldHit;
+
+        if (rb && kinematicWhileDragging) rb.isKinematic = true;
+    }
+
+    void StopDrag()
+    {
+        dragging = false;
+        if (rb && kinematicWhileDragging) rb.isKinematic = true; // keep kinematic after drag
+    }
+
+    // --------- DRAG MOVE ----------
+    void HandleDragMove()
+    {
+        if (!dragging) return;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (dragPlane.Raycast(ray, out float dist))
+        {
+            Vector3 target = ray.GetPoint(dist) + grabOffset;
+
+            if (rb && kinematicWhileDragging)
+                rb.MovePosition(Vector3.Lerp(transform.position, target, followLerp * Time.unscaledDeltaTime));
+            else
+                transform.position = Vector3.Lerp(transform.position, target, followLerp * Time.unscaledDeltaTime);
+        }
     }
 }
