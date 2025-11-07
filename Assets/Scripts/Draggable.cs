@@ -3,22 +3,22 @@ using UnityEngine;
 public class DraggableSimple : MonoBehaviour
 {
     [Header("Pick Settings")]
-    [Tooltip("Layers that can start a drag. Exclude the 'Connection' layer.")]
-    public LayerMask pickMask;                 // Set in Inspector to Everything minus "Connection"
+    public LayerMask pickMask;                 // Set to Everything minus "Connection"
 
     [Header("Drag Settings")]
-    [Tooltip("Drag on a plane whose normal is Up (horizontal plane).")]
     public Vector3 dragPlaneNormal = Vector3.up;
-    [Tooltip("Higher = snappier follow.")]
+
+    public float startDragPixelThreshold = 6f;
+
     public float followLerp = 20f;
 
-    [Header("Physics (optional)")]
-    public Rigidbody rb;                       // Assign if present
-    public bool kinematicWhileDragging = true; // Keeps physics from fighting while dragging
-
+    // --- state ---
+    bool mouseDownOverThis;    // we pressed LMB over this object (but not yet dragging)
     bool dragging;
     Plane dragPlane;
-    Vector3 grabOffset;
+    Vector3 grabOffset;        // pivot - hitPoint
+    Vector3 mouseDownPos;      // in pixels
+    Vector3 startHitPoint;     // world hit point at mouse down
 
     void Reset()
     {
@@ -26,76 +26,76 @@ public class DraggableSimple : MonoBehaviour
         int conn = LayerMask.NameToLayer("Connection");
         pickMask = (conn >= 0) ? ~(1 << conn) : ~0;
     }
-
-    void Awake()
-    {
-        if (!rb) rb = GetComponent<Rigidbody>();
-    }
-
     void OnDisable()
     {
+        mouseDownOverThis = false;
         dragging = false;
-        if (rb && kinematicWhileDragging) rb.isKinematic = true;
     }
 
     void Update()
     {
-        HandleStartStopDrag();
+        HandleMouseDown();
+        HandleMaybeStartDrag();
         HandleDragMove();
+        HandleMouseUp();
     }
 
-    // --------- DRAG START/STOP ----------
-    void HandleStartStopDrag()
+    // LMB down: capture if we clicked THIS object (not on Connection layer)
+    void HandleMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0)) return;
+
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, 1000f, pickMask))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit, 1000f, pickMask))
+            if (hit.transform == transform || hit.transform.IsChildOf(transform))
             {
-                // Only begin drag if we hit this object (or one of its children),
-                // and NOT a "Connection" (filtered by pickMask).
-                if (hit.transform == transform || hit.transform.IsChildOf(transform))
-                    StartDrag(hit.point);
+                mouseDownOverThis = true;
+                mouseDownPos = Input.mousePosition;
+
+                // Build the plane THROUGH THE HIT POINT (not the object position)
+                // so the first projection matches exactly where we clicked.
+                startHitPoint = hit.point;
+                dragPlane = new Plane(dragPlaneNormal, startHitPoint);
+
+                // Keep the exact offset from hit to pivot to avoid any initial pop.
+                grabOffset = transform.position - startHitPoint;
             }
         }
-
-        if (dragging && Input.GetMouseButtonUp(0))
-            StopDrag();
     }
 
-    void StartDrag(Vector3 worldHit)
+    // Don’t start dragging until the mouse has moved a few pixels (debounce)
+    void HandleMaybeStartDrag()
     {
-        dragging = true;
+        if (dragging || !mouseDownOverThis) return;
 
-        // Create a plane through the current object position with the chosen normal
-        dragPlane = new Plane(dragPlaneNormal, transform.position);
-
-        // Maintain the offset from hit point to object pivot so dragging feels “grabbed”
-        grabOffset = transform.position - worldHit;
-
-        if (rb && kinematicWhileDragging) rb.isKinematic = true;
+        var delta = (Vector2)(Input.mousePosition - mouseDownPos);
+        if (delta.sqrMagnitude >= startDragPixelThreshold * startDragPixelThreshold)
+        {
+            dragging = true; // now we start moving it
+        }
     }
 
-    void StopDrag()
-    {
-        dragging = false;
-        if (rb && kinematicWhileDragging) rb.isKinematic = true; // keep kinematic after drag
-    }
-
-    // --------- DRAG MOVE ----------
     void HandleDragMove()
     {
         if (!dragging) return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (dragPlane.Raycast(ray, out float dist))
         {
+            // Project current mouse to plane, then re-apply the saved offset
             Vector3 target = ray.GetPoint(dist) + grabOffset;
 
-            if (rb && kinematicWhileDragging)
-                rb.MovePosition(Vector3.Lerp(transform.position, target, followLerp * Time.unscaledDeltaTime));
-            else
-                transform.position = Vector3.Lerp(transform.position, target, followLerp * Time.unscaledDeltaTime);
+            transform.position = Vector3.Lerp(transform.position, target, followLerp * Time.unscaledDeltaTime);
         }
+    }
+
+    void HandleMouseUp()
+    {
+        if (!Input.GetMouseButtonUp(0)) return;
+
+        // If we never crossed the pixel threshold, we treat it as a click only — no movement occurred.
+        mouseDownOverThis = false;
+        dragging = false;
     }
 }

@@ -149,15 +149,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7749014668397991679, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.92
+      value: -9.85
       objectReference: {fileID: 0}
     - target: {fileID: 7749014668397991679, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.65
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 7749014668397991679, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.88
+      value: 11.76
       objectReference: {fileID: 0}
     - target: {fileID: 7749014668397991679, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
       propertyPath: m_LocalRotation.w
@@ -216,6 +216,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -319,6 +320,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -635,6 +637,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -741,7 +744,7 @@ Transform:
   m_GameObject: {fileID: 503422974}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.69, y: -5, z: 21.2}
+  m_LocalPosition: {x: -9, y: 0, z: 21.2}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -913,7 +916,7 @@ Transform:
   m_GameObject: {fileID: 550713553}
   serializedVersion: 2
   m_LocalRotation: {x: 0.16258788, y: -0, z: -0, w: 0.9866941}
-  m_LocalPosition: {x: -9, y: 1.42, z: 5.8999996}
+  m_LocalPosition: {x: -10, y: 3.34, z: 6.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1082,15 +1085,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.040001
+      value: -12.970001
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.83
+      value: 1.1400001
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.79
+      value: 13.67
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1245,7 +1248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -693.30646, y: 443}
+  m_AnchoredPosition: {x: -687, y: 411}
   m_SizeDelta: {x: 421.6774, y: 52.4241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &679508137
@@ -1268,7 +1271,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Goal: Build a Chair'
+  m_text: 'Goal: Build a Chair
+
+    W/A/S/D to move camera'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1470,6 +1475,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -1492,8 +1498,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -1516,8 +1523,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -1644,6 +1652,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -1681,7 +1690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15.753, y: -11.91}
+  m_AnchoredPosition: {x: 0.000043869, y: -11.91}
   m_SizeDelta: {x: 445.53, y: 317.6694}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412873778
@@ -1824,7 +1833,7 @@ Transform:
   m_GameObject: {fileID: 1439197850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: 0, z: 10}
+  m_LocalPosition: {x: -10, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1844,15 +1853,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.156148
+      value: -8.086148
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9451177
+      value: 1.0248823
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.43
+      value: 14.31
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1919,6 +1928,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -1941,8 +1951,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967287
   dragPlaneNormal: {x: 0, y: 1, z: 0}
+  startDragPixelThreshold: 6
   followLerp: 20
   rb: {fileID: 0}
   kinematicWhileDragging: 1
@@ -1960,15 +1971,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.64
+      value: -13.570001
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.39
+      value: 0.5800001
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.379999
+      value: 12.259999
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2081,8 +2092,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -693, y: 441}
-  m_SizeDelta: {x: 460.613, y: 100}
+  m_AnchoredPosition: {x: -693, y: 410.07764}
+  m_SizeDelta: {x: 460.613, y: 161.8447}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2097364520
 MonoBehaviour:
@@ -2097,7 +2108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9490196, b: 0.7254902, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2152,15 +2163,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7749014668397991679, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.060001
+      value: -8.990002
       objectReference: {fileID: 0}
     - target: {fileID: 7749014668397991679, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.9700001
       objectReference: {fileID: 0}
     - target: {fileID: 7749014668397991679, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.9
+      value: 9.78
       objectReference: {fileID: 0}
     - target: {fileID: 7749014668397991679, guid: 9fd5bab7f2901494fa9285d4a7374c54, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2260,15 +2271,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9216580666224577946, guid: 29c2d60a1a871e74aa6649c7b7656706, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.160001
+      value: -10.090001
       objectReference: {fileID: 0}
     - target: {fileID: 9216580666224577946, guid: 29c2d60a1a871e74aa6649c7b7656706, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 2.4700003
       objectReference: {fileID: 0}
     - target: {fileID: 9216580666224577946, guid: 29c2d60a1a871e74aa6649c7b7656706, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.469999
+      value: 11.349999
       objectReference: {fileID: 0}
     - target: {fileID: 9216580666224577946, guid: 29c2d60a1a871e74aa6649c7b7656706, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2320,15 +2331,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.467001
+      value: -11.397001
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.42
+      value: 1.5500001
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.5
+      value: 11.38
       objectReference: {fileID: 0}
     - target: {fileID: 8411086759091054054, guid: e2fad9806e23d624a937f6901316ddd5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2412,15 +2423,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9057292033640136676, guid: cf7d0eda39dd0427eb3e6b57a685b854, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.160001
+      value: -10.090001
       objectReference: {fileID: 0}
     - target: {fileID: 9057292033640136676, guid: cf7d0eda39dd0427eb3e6b57a685b854, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.641
+      value: 1.3290001
       objectReference: {fileID: 0}
     - target: {fileID: 9057292033640136676, guid: cf7d0eda39dd0427eb3e6b57a685b854, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.9
+      value: 9.78
       objectReference: {fileID: 0}
     - target: {fileID: 9057292033640136676, guid: cf7d0eda39dd0427eb3e6b57a685b854, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2476,15 +2487,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6762826939021760329, guid: 25f66af403b0f417b9f3a05c8159f36e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.82
+      value: -7.75
       objectReference: {fileID: 0}
     - target: {fileID: 6762826939021760329, guid: 25f66af403b0f417b9f3a05c8159f36e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.23
+      value: 1.7400001
       objectReference: {fileID: 0}
     - target: {fileID: 6762826939021760329, guid: 25f66af403b0f417b9f3a05c8159f36e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.9
+      value: 9.78
       objectReference: {fileID: 0}
     - target: {fileID: 6762826939021760329, guid: 25f66af403b0f417b9f3a05c8159f36e, type: 3}
       propertyPath: m_LocalRotation.w
